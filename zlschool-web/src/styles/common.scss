@@ -1,0 +1,102 @@
+$w_255: 225px;
+.flex{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+}
+.pd-20{
+  padding: 20px;
+}
+.mt-15 {
+  margin-top: 15px;
+}
+.mr-15 {
+  margin-right: 15px;
+}
+.btn{
+  padding: 7px 16px;
+}
+.del-btn{
+  padding: 7px 12px;
+}
+.el-table{
+  .cell {
+    text-align: center;
+  }
+}
+.el-input {
+  width: $w_255;
+  vertical-align: top;
+  .el-input__inner {
+    height: 32px;
+    line-height: 32px;
+  }
+}
+.el-input__icon {
+  line-height: 32px;
+}
+.el-textarea {
+  width: $w_255;
+  vertical-align: top;
+}
+.el-date-editor--date {
+  width: $w_255;
+}
+.edit-dialog {
+  .el-dialog {
+    width: 395px;
+  }
+}
+.el-dialog__body {
+  margin-left: 4%;
+  .dept i {
+    display: inline-block;
+    width: 9px;
+    color: red;
+  }
+  .dept {
+    .name{
+      display: inline-block;
+      width: 84px;
+      text-align: right;
+      vertical-align: top;
+    }
+    .el-icon-arrow-up {
+      line-height: 32px;
+      color: #C0C4CC;
+    }
+    .el-form-item__content {
+      line-height: 32px;
+    }
+    .el-icon-date,
+    .el-input__icon {
+      width: 25px;
+      color: #C0C4CC;
+    }
+  }
+  .el-form-item__error {
+    left: 89px;
+  }
+}
+.web-pic {
+  .el-input {
+    width: 171px;
+  }
+  .upload-btn {
+    display: inline-block;
+  }
+  .btn {
+    padding:7px 10px;
+  }
+}
+.state {
+  .el-select,.el-input {
+    width: 95px;
+  }
+}
+.import-btn {
+  display: inline-block;
+  margin:1px 10px 0;
+  vertical-align: top;
+}

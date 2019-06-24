@@ -1,0 +1,13 @@
+47.98.47.100:22
+root/Xcxx!123#
+
+/opt/apache-tomcat-8.5.35/webapps/dist
+
+http://47.98.47.100/dist
+
+
+http://47.98.47.100:8080/OLOSchool/
+admin/111111
+
+wugg/123
+wangym/123
