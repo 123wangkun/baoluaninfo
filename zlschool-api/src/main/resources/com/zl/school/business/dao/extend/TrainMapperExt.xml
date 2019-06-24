@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.train.TrainMapper">
+
+  <select id="selectAllTrainByEid" parameterType="com.zl.school.business.dto.train.GetTrainListReq" resultType="com.zl.school.business.dto.train.GetTrainListRes">
+    select
+    id, name, start_time as startTime, end_time as endTime, status, integral,created_time as createdTime,
+    from t_train
+    where eid = #{eId} and type = #{type}
+    <if test="name != '' and name != null">
+      AND name LIKE '%${name}%'
+    </if>
+    <if test="state != '' and state != null">
+      AND state LIKE '%${state}%'
+    </if>
+  </select>
+</mapper>

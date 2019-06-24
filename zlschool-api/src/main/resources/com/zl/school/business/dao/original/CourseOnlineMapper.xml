@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.course.CourseOnlineMapper">
+  <resultMap id="BaseResultMap" type="com.zl.school.business.entity.course.CourseOnline">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="eid" jdbcType="VARCHAR" property="eid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type_id" jdbcType="VARCHAR" property="typeId" />
+    <result column="logo_src" jdbcType="VARCHAR" property="logoSrc" />
+    <result column="mobile_src" jdbcType="VARCHAR" property="mobileSrc" />
+    <result column="file_type" jdbcType="INTEGER" property="fileType" />
+    <result column="file_src" jdbcType="VARCHAR" property="fileSrc" />
+    <result column="file_size" jdbcType="BIGINT" property="fileSize" />
+    <result column="descript" jdbcType="VARCHAR" property="descript" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="position" jdbcType="INTEGER" property="position" />
+    <result column="total_time" jdbcType="INTEGER" property="totalTime" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="pro_content" jdbcType="VARCHAR" property="proContent" />
+    <result column="prod_time" jdbcType="TIMESTAMP" property="prodTime" />
+    <result column="pro_user" jdbcType="VARCHAR" property="proUser" />
+    <result column="pro_memo" jdbcType="VARCHAR" property="proMemo" />
+    <result column="isfree" jdbcType="INTEGER" property="isfree" />
+    <result column="isintegral" jdbcType="INTEGER" property="isintegral" />
+    <result column="integral" jdbcType="INTEGER" property="integral" />
+    <result column="ismoney" jdbcType="INTEGER" property="ismoney" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="pro_status" jdbcType="INTEGER" property="proStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, eid, name, type_id, logo_src, mobile_src, file_type, file_src, file_size, descript, 
+    state, position, total_time, memo, created_time, create_user, updated_time, update_user, 
+    pro_content, prod_time, pro_user, pro_memo, isfree, isintegral, integral, ismoney, 
+    money, pro_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_course_online
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_course_online
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zl.school.business.entity.course.CourseOnline">
+    insert into t_course_online (id, eid, name, 
+      type_id, logo_src, mobile_src, 
+      file_type, file_src, file_size, 
+      descript, state, position, 
+      total_time, memo, created_time, 
+      create_user, updated_time, update_user, 
+      pro_content, prod_time, pro_user, 
+      pro_memo, isfree, isintegral, 
+      integral, ismoney, money, 
+      pro_status)
+    values (#{id,jdbcType=VARCHAR}, #{eid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{typeId,jdbcType=VARCHAR}, #{logoSrc,jdbcType=VARCHAR}, #{mobileSrc,jdbcType=VARCHAR}, 
+      #{fileType,jdbcType=INTEGER}, #{fileSrc,jdbcType=VARCHAR}, #{fileSize,jdbcType=BIGINT}, 
+      #{descript,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{position,jdbcType=INTEGER}, 
+      #{totalTime,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{proContent,jdbcType=VARCHAR}, #{prodTime,jdbcType=TIMESTAMP}, #{proUser,jdbcType=VARCHAR}, 
+      #{proMemo,jdbcType=VARCHAR}, #{isfree,jdbcType=INTEGER}, #{isintegral,jdbcType=INTEGER}, 
+      #{integral,jdbcType=INTEGER}, #{ismoney,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{proStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zl.school.business.entity.course.CourseOnline">
+    insert into t_course_online
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="eid != null">
+        eid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="logoSrc != null">
+        logo_src,
+      </if>
+      <if test="mobileSrc != null">
+        mobile_src,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="fileSrc != null">
+        file_src,
+      </if>
+      <if test="fileSize != null">
+        file_size,
+      </if>
+      <if test="descript != null">
+        descript,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="totalTime != null">
+        total_time,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="proContent != null">
+        pro_content,
+      </if>
+      <if test="prodTime != null">
+        prod_time,
+      </if>
+      <if test="proUser != null">
+        pro_user,
+      </if>
+      <if test="proMemo != null">
+        pro_memo,
+      </if>
+      <if test="isfree != null">
+        isfree,
+      </if>
+      <if test="isintegral != null">
+        isintegral,
+      </if>
+      <if test="integral != null">
+        integral,
+      </if>
+      <if test="ismoney != null">
+        ismoney,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="proStatus != null">
+        pro_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="eid != null">
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="logoSrc != null">
+        #{logoSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileSrc != null">
+        #{mobileSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=INTEGER},
+      </if>
+      <if test="fileSrc != null">
+        #{fileSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="descript != null">
+        #{descript,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=INTEGER},
+      </if>
+      <if test="totalTime != null">
+        #{totalTime,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="proContent != null">
+        #{proContent,jdbcType=VARCHAR},
+      </if>
+      <if test="prodTime != null">
+        #{prodTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proUser != null">
+        #{proUser,jdbcType=VARCHAR},
+      </if>
+      <if test="proMemo != null">
+        #{proMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="isfree != null">
+        #{isfree,jdbcType=INTEGER},
+      </if>
+      <if test="isintegral != null">
+        #{isintegral,jdbcType=INTEGER},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="ismoney != null">
+        #{ismoney,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="proStatus != null">
+        #{proStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zl.school.business.entity.course.CourseOnline">
+    update t_course_online
+    <set>
+      <if test="eid != null">
+        eid = #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="logoSrc != null">
+        logo_src = #{logoSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileSrc != null">
+        mobile_src = #{mobileSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=INTEGER},
+      </if>
+      <if test="fileSrc != null">
+        file_src = #{fileSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        file_size = #{fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="descript != null">
+        descript = #{descript,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=INTEGER},
+      </if>
+      <if test="totalTime != null">
+        total_time = #{totalTime,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="proContent != null">
+        pro_content = #{proContent,jdbcType=VARCHAR},
+      </if>
+      <if test="prodTime != null">
+        prod_time = #{prodTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proUser != null">
+        pro_user = #{proUser,jdbcType=VARCHAR},
+      </if>
+      <if test="proMemo != null">
+        pro_memo = #{proMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="isfree != null">
+        isfree = #{isfree,jdbcType=INTEGER},
+      </if>
+      <if test="isintegral != null">
+        isintegral = #{isintegral,jdbcType=INTEGER},
+      </if>
+      <if test="integral != null">
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="ismoney != null">
+        ismoney = #{ismoney,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="proStatus != null">
+        pro_status = #{proStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zl.school.business.entity.course.CourseOnline">
+    update t_course_online
+    set eid = #{eid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      logo_src = #{logoSrc,jdbcType=VARCHAR},
+      mobile_src = #{mobileSrc,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=INTEGER},
+      file_src = #{fileSrc,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=BIGINT},
+      descript = #{descript,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      position = #{position,jdbcType=INTEGER},
+      total_time = #{totalTime,jdbcType=INTEGER},
+      memo = #{memo,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      pro_content = #{proContent,jdbcType=VARCHAR},
+      prod_time = #{prodTime,jdbcType=TIMESTAMP},
+      pro_user = #{proUser,jdbcType=VARCHAR},
+      pro_memo = #{proMemo,jdbcType=VARCHAR},
+      isfree = #{isfree,jdbcType=INTEGER},
+      isintegral = #{isintegral,jdbcType=INTEGER},
+      integral = #{integral,jdbcType=INTEGER},
+      ismoney = #{ismoney,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      pro_status = #{proStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

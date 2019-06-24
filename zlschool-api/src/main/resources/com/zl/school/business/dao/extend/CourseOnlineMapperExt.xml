@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.course.CourseOnlineMapper">
+
+    <select id="isExistByCourseOnline" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_course_online where type_id=#{arg0}
+    </select>
+
+    <select id="selectAllCourseOnlineByEid" parameterType="com.zl.school.business.dto.course.GetCourseOnlineListReq" resultType="com.zl.school.business.dto.course.GetCourseOnlineListRes">
+        select a.id, a.name,a.state,a.created_time as createdTime,b.name as typeName,
+        a.pro_status as proStatus,
+        case
+            when a.pro_status=1 then '待审核'
+            when a.pro_status=2 then '审核未通过'
+            when a.pro_status=3 then
+                (case
+                when a.state=1 then '启用'
+                when a.state=2 then '禁用'
+                end)
+        end  as statusName
+        from t_course_online a,t_course_type b
+        where a.type_id = b.id and a.eid = #{eId}
+        <if test="typeId != '' and typeId != null">
+            AND a.type_id LIKE '%${typeId}%'
+        </if>
+        <if test="name != '' and name != null">
+            AND a.name LIKE '%${name}%'
+        </if>
+        <if test="state != -1 and state != 0">
+            AND a.state = #{state}
+        </if>
+        <if test="proStatus != -1 and proStatus != 0">
+            AND  a.pro_status = #{proStatus}
+        </if>
+        group by a.id
+    </select>
+
+    <select id="selectOnlineActivityList" parameterType="com.zl.school.business.dto.course.GetOnlineActivityListReq" resultType="com.zl.school.business.dto.course.GetOnlineActivityListRes">
+        select
+        a.id, a.name as courseName, e.type, e.state,e.created_time as createdTime,e.comment,b.name as realName,d.name as depName
+        from t_course_online a,user b,t_sys_enterprise_user c,t_sys_enterprise d,t_course_online_activity e
+        where a.id = e.under_id and e.user_id = b.id and e.user_id =c.user_id and c.depart_id = d.id and e.under_id = #{id}
+        <if test="realName != '' and realName != null">
+            AND b.real_name LIKE '%${realName}%'
+        </if>
+        <if test="type != '' and type != null">
+            AND e.type LIKE '%${type}%'
+        </if>
+        <if test="state !=0">
+            AND e.state LIKE '%${state}%'
+        </if>
+        group by b.id
+    </select>
+</mapper>

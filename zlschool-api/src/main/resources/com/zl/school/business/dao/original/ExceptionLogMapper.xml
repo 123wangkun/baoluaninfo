@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zl.school.business.dao.ExceptionLogMapper">
+    <resultMap id="BaseResultMap" type="com.zl.school.business.entity.ExceptionLog">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="param" property="param" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="action_key" property="actionKey" jdbcType="VARCHAR"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="port" property="port" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.zl.school.business.entity.ExceptionLog" extends="BaseResultMap">
+        <result column="exception_info" property="exceptionInfo" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, param, create_time, action_key, ip, port
+    </sql>
+    <sql id="Blob_Column_List">
+        t_sys_exception_log
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_sys_exception_log
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_sys_exception_log
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.zl.school.business.entity.ExceptionLog">
+        insert into t_sys_exception_log (id, param, create_time,
+        action_key, ip, port,
+        exception_info)
+        values (#{id,jdbcType=INTEGER}, #{param,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{actionKey,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER},
+        #{exceptionInfo,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zl.school.business.entity.ExceptionLog">
+        insert into t_sys_exception_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="param != null">
+                param,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="actionKey != null">
+                action_key,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="port != null">
+                port,
+            </if>
+            <if test="exceptionInfo != null">
+                exception_info,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="param != null">
+                #{param,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="actionKey != null">
+                #{actionKey,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="port != null">
+                #{port,jdbcType=INTEGER},
+            </if>
+            <if test="exceptionInfo != null">
+                #{exceptionInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zl.school.business.entity.ExceptionLog">
+        update t_sys_exception_log
+        <set>
+            <if test="param != null">
+                param = #{param,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="actionKey != null">
+                action_key = #{actionKey,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                ip = #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="port != null">
+                port = #{port,jdbcType=INTEGER},
+            </if>
+            <if test="exceptionInfo != null">
+                exception_info = #{exceptionInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zl.school.business.entity.ExceptionLog">
+        update t_sys_exception_log
+        set param = #{param,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        action_key = #{actionKey,jdbcType=VARCHAR},
+        ip = #{ip,jdbcType=VARCHAR},
+        port = #{port,jdbcType=INTEGER},
+        exception_info = #{exceptionInfo,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zl.school.business.entity.ExceptionLog">
+        update t_sys_exception_log
+        set param = #{param,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        action_key = #{actionKey,jdbcType=VARCHAR},
+        ip = #{ip,jdbcType=VARCHAR},
+        port = #{port,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

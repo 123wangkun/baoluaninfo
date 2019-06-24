@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.check.CheckInfoMapper">
+
+  <select id="selectAllCheckInfoByEid" parameterType="com.zl.school.business.dto.check.GetCheckInfoListReq" resultType="com.zl.school.business.dto.check.GetCheckInfoListRes">
+    select
+    id, eid, name, content, check_time as checkTime,memo
+    from t_zl_check_info
+    where eid = #{eId}
+    <if test="name != '' and name != null">
+      AND name LIKE '%${name}%'
+    </if>
+    <if test="startTime != '' and startTime != null">
+      AND check_time &gt; '%${startTime}%'
+    </if>
+    <if test="endTime != '' and endTime != null">
+      AND check_time &lt; '%${endTime}%'
+    </if>
+  </select>
+</mapper>

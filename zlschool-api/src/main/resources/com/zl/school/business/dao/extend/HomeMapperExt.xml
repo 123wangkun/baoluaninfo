@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.message.HomeMapper">
+
+  <select id="selectAllHomeByEid" parameterType="java.lang.String" resultType="com.zl.school.business.dto.message.GetHomeListRes">
+    select
+    id, name, src, state, created_time as createdTime, memo
+    from t_zl_home
+    where eid = #{param1}
+  </select>
+</mapper>

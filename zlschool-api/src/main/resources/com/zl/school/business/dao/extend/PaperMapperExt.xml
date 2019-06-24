@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.exam.PaperMapper">
+
+    <select id="selectPaperByType" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_paper where type_id=#{param1}
+    </select>
+
+    <select id="selectAllPaperByEid" parameterType="com.zl.school.business.dto.exam.GetPaperListReq" resultType="com.zl.school.business.dto.exam.GetPaperListRes">
+        select
+        a.id, a.type_id as typeId, a.name, a.total_score as totalScore, a.pass_line as passLine, a.spend_time as spendTime, a.start_status as startStatus, a.release_status as releaseStatus,
+        a.integral, a.single, a.multiple, a.judge,a.memo,b.name as typeName
+        from t_paper_type b,t_paper a
+        where a.eid = #{eId} and a.id = b.type_id
+        <if test="name != '' and name != null">
+            AND a.name LIKE '%${name}%'
+        </if>
+        <if test="startStatus != '' and startStatus != null">
+            AND a.start_status LIKE '%${startStatus}%'
+        </if>
+        <if test="typeId != '' and typeId != null">
+            AND b.id LIKE '%${typeId}%'
+        </if>
+        <if test="releaseStatus != '' and releaseStatus != null">
+            AND a.release_status LIKE '%${releaseStatus}%'
+        </if>
+        GROUP BY a.id
+    </select>
+</mapper>

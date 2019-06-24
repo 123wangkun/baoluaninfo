@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zl.school.business.dao.train.TrainTaskMapper">
+    <delete id="deleteTaskByTrainId" parameterType="java.lang.String">
+        delete from t_train_task
+        where train_id = #{param1}
+    </delete>
+
+    <select id="selectAllTaskByTrainId" parameterType="java.lang.String" resultType="com.zl.school.business.dto.train.GetTrainTaskListRes">
+    select a.id, a.name,a.relation_id as relationId, a.type, a.position, a.end_time as endTime,t.name as relationName,
+    case
+        when a.type=1 then '线上课程'
+        when a.type=2 then '线下课程'
+        when a.type=3 then '线上考试'
+        when a.type=4 then '线下考试'
+    end  as typeName
+    from t_train_task a
+    left join (
+    select type, name, id from (
+      select 1 as type, a.name, a.id from t_course_online a union
+      select 2 as type, b.name, b.id from t_course_under b union
+      select 3 as type, c.name, c.id from t_paper c union
+      select 4 as type, d.name, d.id from t_exam_under d
+    ) as t) as t on t.type=a.type and t.id=a.relation_id and a.train_id=#{param1}
+    </select>
+</mapper>
+

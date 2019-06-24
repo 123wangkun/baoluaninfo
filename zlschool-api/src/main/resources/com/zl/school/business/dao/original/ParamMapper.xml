@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zl.school.business.dao.system.ParamMapper" >
+  <resultMap id="BaseResultMap" type="com.zl.school.business.entity.system.Param" >
+    <constructor >
+      <idArg column="eid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <idArg column="user_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <idArg column="pname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pvalue" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="memo" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    eid, user_id, pname, pvalue, memo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zl.school.business.entity.system.Param" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_param
+    where eid = #{eid,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+      and pname = #{pname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zl.school.business.entity.system.Param" >
+    delete from t_sys_param
+    where eid = #{eid,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+      and pname = #{pname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zl.school.business.entity.system.Param" >
+    insert into t_sys_param (eid, user_id, pname, 
+      pvalue, memo)
+    values (#{eid,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR}, 
+      #{pvalue,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zl.school.business.entity.system.Param" >
+    insert into t_sys_param
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="pvalue != null" >
+        pvalue,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pvalue != null" >
+        #{pvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zl.school.business.entity.system.Param" >
+    update t_sys_param
+    <set >
+      <if test="pvalue != null" >
+        pvalue = #{pvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where eid = #{eid,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+      and pname = #{pname,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zl.school.business.entity.system.Param" >
+    update t_sys_param
+    set pvalue = #{pvalue,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR}
+    where eid = #{eid,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+      and pname = #{pname,jdbcType=VARCHAR}
+  </update>
+</mapper>

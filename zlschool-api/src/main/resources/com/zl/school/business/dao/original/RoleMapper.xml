@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.system.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.zl.school.business.entity.system.Role">
+    <id column="eid" jdbcType="VARCHAR" property="eid" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="name" jdbcType="VARCHAR" property="name" />
+    <id column="memo" jdbcType="VARCHAR" property="memo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    eid, id, name, memo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.zl.school.business.entity.system.Role" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_role
+    where eid = #{eid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_sys_role
+    where eid = #{param1}
+    and id = #{param2}
+  </select>
+  <delete id="deleteByKey" parameterType="java.lang.String">
+    delete from t_sys_role
+    where eid = #{param1}
+      and id = #{param2}
+  </delete>
+  <insert id="insert" parameterType="com.zl.school.business.entity.system.Role">
+    insert into t_sys_role (eid, id, name, 
+      memo)
+    values (#{eid,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zl.school.business.entity.system.Role">
+    insert into t_sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eid != null">
+        eid,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eid != null">
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zl.school.business.entity.system.Role">
+    update t_sys_role
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where eid = #{eid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zl.school.business.entity.system.Role">
+    update t_sys_role
+    set name = #{name,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR}
+    where eid = #{eid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

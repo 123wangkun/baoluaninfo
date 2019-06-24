@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.label.LabelMapper">
+
+  <!--<select id="selectAllLabelByEid" parameterType="java.lang.String" resultMap="com.zl.school.business.dto.label.GetLabelListRes">-->
+    <!--select-->
+    <!--a.id, a.name, a.parent_id, a.created_time, a.memo-->
+    <!--from t_zl_label a-->
+    <!--where a.eid = #{arg0}-->
+    <!--<if test="name != '' and name != null">-->
+      <!--AND name LIKE '%${name}%'-->
+    <!--</if>-->
+  <!--</select>-->
+
+  <!--<select id="selectLabelById" parameterType="java.lang.String" resultType="java.lang.String">-->
+    <!--select-->
+    <!--a.name-->
+    <!--from t_zl_label a,t_zl_label_detail b-->
+    <!--where b.relation_id = #{param1} and a.id = b.lable_id-->
+  <!--</select>-->
+  <select id="selectCountChildLabel" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_zl_label where parent_id=#{param1}
+    </select>
+</mapper>

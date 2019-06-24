@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zl.school.business.dao.exam.ExamOnlineMapper">
+	<select id="selectCountExamOnline" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_exam_online where paper_id=#{param1}
+    </select>
+
+
+    <select id="selectExamOnlineUserList" parameterType="com.zl.school.business.dto.exam.GetExamOnlineUserReq" resultType="com.zl.school.business.dto.exam.GetExamOnlineUserRes">
+        select
+        a.id, a.name as examOnlineName, d.name as userName, b.name as depName, a.start_time as startTime, a.total_score as totalScore,
+        a.end_time as endTime
+        from t_exam_online a,t_sys_department b,t_sys_enterprise_user c,t_sys_user d
+        where a.paper_id = #{paperId} and b.id = c.depart_id and a.user_id = c.user_id and c.user_id = d.id
+        <if test="name != '' and name != null">
+            AND d.name LIKE '%${name}%'
+        </if>
+        group by d.user_id
+    </select>
+</mapper>
+

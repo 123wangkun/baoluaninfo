@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.system.EnterpriseMapper">
+  <resultMap id="BaseResultMap" type="com.zl.school.business.entity.system.Enterprise">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="allow_size" jdbcType="BIGINT" property="allowSize" />
+    <result column="make_size" jdbcType="BIGINT" property="makeSize" />
+    <result column="allow_user" jdbcType="INTEGER" property="allowUser" />
+    <result column="make_user" jdbcType="INTEGER" property="makeUser" />
+    <result column="validate" jdbcType="TIMESTAMP" property="validate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="license" jdbcType="VARCHAR" property="license" />
+    <result column="license_term" jdbcType="TIMESTAMP" property="licenseTerm" />
+    <result column="create_userid" jdbcType="VARCHAR" property="createUserid" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="update_userid" jdbcType="VARCHAR" property="updateUserid" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="pro_content" jdbcType="VARCHAR" property="proContent" />
+    <result column="pro_time" jdbcType="TIMESTAMP" property="proTime" />
+    <result column="pro_userid" jdbcType="VARCHAR" property="proUserid" />
+    <result column="pro_memo" jdbcType="VARCHAR" property="proMemo" />
+    <result column="sys_name" jdbcType="VARCHAR" property="sysName" />
+    <result column="sys_logo" jdbcType="VARCHAR" property="sysLogo" />
+    <result column="invite_link" jdbcType="VARCHAR" property="inviteLink" />
+    <result column="pro_status" jdbcType="INTEGER" property="proStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, code, parent_id, allow_size, make_size, allow_user, make_user, validate, 
+    status, license, license_term, create_userid, created_time, update_userid, updated_time, 
+    pro_content, pro_time, pro_userid, pro_memo, sys_name, sys_logo, invite_link, pro_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_sys_enterprise
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_sys_enterprise
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zl.school.business.entity.system.Enterprise">
+    insert into t_sys_enterprise (id, name, code, 
+      parent_id, allow_size, make_size, 
+      allow_user, make_user, validate, 
+      status, license, license_term, 
+      create_userid, created_time, update_userid, 
+      updated_time, pro_content, pro_time, 
+      pro_userid, pro_memo, sys_name, 
+      sys_logo, invite_link, pro_status
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{allowSize,jdbcType=BIGINT}, #{makeSize,jdbcType=BIGINT}, 
+      #{allowUser,jdbcType=INTEGER}, #{makeUser,jdbcType=INTEGER}, #{validate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{license,jdbcType=VARCHAR}, #{licenseTerm,jdbcType=TIMESTAMP}, 
+      #{createUserid,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updateUserid,jdbcType=VARCHAR}, 
+      #{updatedTime,jdbcType=TIMESTAMP}, #{proContent,jdbcType=VARCHAR}, #{proTime,jdbcType=TIMESTAMP}, 
+      #{proUserid,jdbcType=VARCHAR}, #{proMemo,jdbcType=VARCHAR}, #{sysName,jdbcType=VARCHAR}, 
+      #{sysLogo,jdbcType=VARCHAR}, #{inviteLink,jdbcType=VARCHAR}, #{proStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zl.school.business.entity.system.Enterprise">
+    insert into t_sys_enterprise
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="allowSize != null">
+        allow_size,
+      </if>
+      <if test="makeSize != null">
+        make_size,
+      </if>
+      <if test="allowUser != null">
+        allow_user,
+      </if>
+      <if test="makeUser != null">
+        make_user,
+      </if>
+      <if test="validate != null">
+        validate,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="license != null">
+        license,
+      </if>
+      <if test="licenseTerm != null">
+        license_term,
+      </if>
+      <if test="createUserid != null">
+        create_userid,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updateUserid != null">
+        update_userid,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="proContent != null">
+        pro_content,
+      </if>
+      <if test="proTime != null">
+        pro_time,
+      </if>
+      <if test="proUserid != null">
+        pro_userid,
+      </if>
+      <if test="proMemo != null">
+        pro_memo,
+      </if>
+      <if test="sysName != null">
+        sys_name,
+      </if>
+      <if test="sysLogo != null">
+        sys_logo,
+      </if>
+      <if test="inviteLink != null">
+        invite_link,
+      </if>
+      <if test="proStatus != null">
+        pro_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="allowSize != null">
+        #{allowSize,jdbcType=BIGINT},
+      </if>
+      <if test="makeSize != null">
+        #{makeSize,jdbcType=BIGINT},
+      </if>
+      <if test="allowUser != null">
+        #{allowUser,jdbcType=INTEGER},
+      </if>
+      <if test="makeUser != null">
+        #{makeUser,jdbcType=INTEGER},
+      </if>
+      <if test="validate != null">
+        #{validate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="license != null">
+        #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseTerm != null">
+        #{licenseTerm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserid != null">
+        #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserid != null">
+        #{updateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proContent != null">
+        #{proContent,jdbcType=VARCHAR},
+      </if>
+      <if test="proTime != null">
+        #{proTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proUserid != null">
+        #{proUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="proMemo != null">
+        #{proMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="sysName != null">
+        #{sysName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLogo != null">
+        #{sysLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteLink != null">
+        #{inviteLink,jdbcType=VARCHAR},
+      </if>
+      <if test="proStatus != null">
+        #{proStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zl.school.business.entity.system.Enterprise">
+    update t_sys_enterprise
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="allowSize != null">
+        allow_size = #{allowSize,jdbcType=BIGINT},
+      </if>
+      <if test="makeSize != null">
+        make_size = #{makeSize,jdbcType=BIGINT},
+      </if>
+      <if test="allowUser != null">
+        allow_user = #{allowUser,jdbcType=INTEGER},
+      </if>
+      <if test="makeUser != null">
+        make_user = #{makeUser,jdbcType=INTEGER},
+      </if>
+      <if test="validate != null">
+        validate = #{validate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="license != null">
+        license = #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseTerm != null">
+        license_term = #{licenseTerm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserid != null">
+        create_userid = #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserid != null">
+        update_userid = #{updateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proContent != null">
+        pro_content = #{proContent,jdbcType=VARCHAR},
+      </if>
+      <if test="proTime != null">
+        pro_time = #{proTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proUserid != null">
+        pro_userid = #{proUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="proMemo != null">
+        pro_memo = #{proMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="sysName != null">
+        sys_name = #{sysName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLogo != null">
+        sys_logo = #{sysLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteLink != null">
+        invite_link = #{inviteLink,jdbcType=VARCHAR},
+      </if>
+      <if test="proStatus != null">
+        pro_status = #{proStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zl.school.business.entity.system.Enterprise">
+    update t_sys_enterprise
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      allow_size = #{allowSize,jdbcType=BIGINT},
+      make_size = #{makeSize,jdbcType=BIGINT},
+      allow_user = #{allowUser,jdbcType=INTEGER},
+      make_user = #{makeUser,jdbcType=INTEGER},
+      validate = #{validate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      license = #{license,jdbcType=VARCHAR},
+      license_term = #{licenseTerm,jdbcType=TIMESTAMP},
+      create_userid = #{createUserid,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      update_userid = #{updateUserid,jdbcType=VARCHAR},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      pro_content = #{proContent,jdbcType=VARCHAR},
+      pro_time = #{proTime,jdbcType=TIMESTAMP},
+      pro_userid = #{proUserid,jdbcType=VARCHAR},
+      pro_memo = #{proMemo,jdbcType=VARCHAR},
+      sys_name = #{sysName,jdbcType=VARCHAR},
+      sys_logo = #{sysLogo,jdbcType=VARCHAR},
+      invite_link = #{inviteLink,jdbcType=VARCHAR},
+      pro_status = #{proStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="SelectDepByEntCode" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_sys_enterprise
+    where code = #{param1}
+  </select>
+  <select id="getEnterpriseByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_sys_enterprise
+    where name = #{param1} and parent_id = #{param2}
+  </select>
+  <select id="SelectComByParentId" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_sys_enterprise
+    where id = #{arg0}
+  </select>
+</mapper>

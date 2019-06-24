@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.exam.QuestionInfoMapper">
+
+  <select id="selectAllQuestionInfoByEid" parameterType="com.zl.school.business.dto.label.GetQuestionInfoListReq" resultType="com.zl.school.business.dto.label.GetQuestionInfoListRes">
+    select
+    id, name, type, image, score, answer, created_time, memo
+    from t_question_info
+    where eid = #{eId}
+    <if test="name != '' and name != null">
+      AND name LIKE '%${name}%'
+    </if>
+    <if test="type != '' and type != null">
+      AND type LIKE '%${type}%'
+    </if>
+  </select>
+
+  <select id="selectQuestionListByLabel" parameterType="com.zl.school.business.dto.label.GetQuestionReq" resultType="com.zl.school.business.dto.label.GetQuestionListRes">
+    select
+    a.id,a.name,a.score, a.answer, a.created_time as createdTime, a.memo
+    case
+    when a.type=1 then '单选题'
+    when a.type=2 then '多选题'
+    when a.type=3 then '判断题'
+    end  as typeName
+    from t_question_info a,t_zl_label_detail b
+    where a.id=b.relation_id and a.type=#{type} and a.eid=#{eId} and b.lable_id in (#{labs})
+    <if test="name != '' and name != null">
+      AND a.name LIKE '%${name}%'
+    </if>
+    <if test="score != '' and score != null">
+      AND a.score LIKE '%${score}%'
+    </if>
+  </select>
+</mapper>

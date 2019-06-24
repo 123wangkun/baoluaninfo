@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zl.school.business.dao.system.RolePowerMapper">
+    <select id="selectCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_sys_role_power where eid=#{param1} and role_id=#{param2}
+  </select>
+    <delete id="deleteRoles" parameterType="java.lang.String" >
+    delete from t_sys_role_power
+    where  eid=#{param1} and role_id=#{param2}
+  </delete>
+    <delete id="deleteByKey" parameterType="java.lang.String">
+    delete from t_sys_role
+    where eid = #{param1}
+      and id = #{param2}
+  </delete>
+</mapper>
+

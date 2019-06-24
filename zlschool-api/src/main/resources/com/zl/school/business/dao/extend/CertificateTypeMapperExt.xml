@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.certificate.CertificateTypeMapper">
+
+  <select id="selectAllByEid" parameterType="java.lang.String" resultType="com.zl.school.business.dto.certificate.GetCertificateTypeListRes">
+    select
+    id, name,integral, created_time as createdTime,memo,
+    case
+      when state=1 then '启用'
+      when state=2 then '禁用'
+    end as stateName
+    from t_certificate_type
+    where eid = #{param1}
+  </select>
+
+  <select id="selectCountCertificateType" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_certificate_type a,t_certificate b where a.id=b.type_id and b.eid = #{param1} and a.id = #{param2}
+  </select>
+</mapper>

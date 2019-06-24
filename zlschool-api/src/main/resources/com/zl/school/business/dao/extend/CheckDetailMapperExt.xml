@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.check.CheckDetailMapper">
+
+  <select id="selectCountCheck" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_zl_check_detail where check_id=#{param1}
+    </select>
+
+    <select id="selectCheckDetailByCheckId" parameterType="com.zl.school.business.dto.check.GetCheckDetailListReq" resultType="com.zl.school.business.dto.check.GetCheckDetailListRes">
+        select
+        b.id,b.check_score, a.name as checkName, c.name as userName
+        from t_zl_check_info a,t_zl_check_detail b,t_sys_user c
+        where b.check_id = #{checkId} and b.check_id=a.id and  b.user_id = c.id
+        <if test="name != '' and name != null">
+            AND a.name LIKE '%${name}%'
+        </if>
+    </select>
+
+</mapper>

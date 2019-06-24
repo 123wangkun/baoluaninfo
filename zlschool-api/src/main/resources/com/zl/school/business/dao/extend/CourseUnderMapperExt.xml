@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.course.CourseUnderMapper">
+
+    <select id="isExistByCourseUnder" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_course_under where type_id=#{param1}
+    </select>
+
+    <select id="selectAllCourseUnderByEid" parameterType="com.zl.school.business.dto.course.GetCourseUnderListReq" resultType="com.zl.school.business.dto.course.GetCourseUnderListRes">
+        select
+        a.id, a.name, a.type_id, a.state,a.total_time as totalTime,a.study_time as study_time,a.created_time as createdTime,b.name as typeName
+        case
+        when a.state=1 then '已发布'
+        when a.state=2 then '未发布'
+        end  as stateName
+        from t_course_under a,t_course_type b
+        where a.type_id = b.id and a.eid = #{eId}
+        <if test="typeId != '' and typeId != null">
+            AND a.type_id LIKE '%${typeId}%'
+        </if>
+        <if test="name != '' and name != null">
+            AND a.name LIKE '%${name}%'
+        </if>
+        <if test="state != '' and state != null">
+            AND a.state LIKE '%${state}%'
+        </if>
+        group by a.id
+    </select>
+
+    <select id="selectStudyUserList" parameterType="com.zl.school.business.dto.course.GetCourseUnderUserListReq" resultType="com.zl.school.business.dto.course.GetCourseUnderUserListRes">
+        select
+        a.id, a.name as courseName, e.spend_time as spendTime, e.state,e.created_time  as createdTime,e.memo,b.name as realName,d.name as depName
+        from t_course_under a,user b,t_sys_enterprise_user c,t_sys_enterprise d,t_course_under_activity e
+        where a.id = e.under_id and e.user_id = b.id and e.user_id =c.user_id and c.depart_id = d.id and e.under_id = #{id}
+        <if test="realName != '' and realName != null">
+            AND b.real_name LIKE '%${realName}%'
+        </if>
+        <if test="state != '' and state != null">
+            AND e.state LIKE '%${state}%'
+        </if>
+        group by b.id
+    </select>
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.course.CourseTypeMapper">
+
+    <select id="selectAllCourseTypeByEid" parameterType="java.lang.String" resultType="com.zl.school.business.dto.course.GetCourseTypeListRes">
+        select
+        id, name, position, memo, created_time as createdTime
+        from t_course_type
+        where eid = #{param1}
+        order by created_time DESC
+    </select>
+
+</mapper>

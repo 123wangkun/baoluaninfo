@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zl.school.business.dao.train.TrainActivityMapper">
+	<select id="selectCountTrain" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_train_activity where train_id=#{param1}
+    </select>
+
+    <select id="selectCountTask" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_train_activity where task_id=#{param1}
+    </select>
+</mapper>
+

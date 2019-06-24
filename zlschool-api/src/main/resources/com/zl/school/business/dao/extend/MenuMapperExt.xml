@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zl.school.business.dao.system.MenuMapper">
+	<select id="selectAllMenuByUser" parameterType="java.lang.String" resultType="com.zl.school.business.entity.system.Menu">
+        select a.id, a.name, a.parent_id as parentId, a.link_url as linkUrl, a.pic_url as picUrl, a.type, a.position, a.memo
+        from t_sys_menu a,t_sys_user_power b,t_sys_role_power c
+        where a.eid = #{param1} and a.user_id = #{param2} and b.role_id = c.role_id
+        and c.menu_id = a.id  and a.type = 0 group by a.id
+    </select>
+</mapper>
+

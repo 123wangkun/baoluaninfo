@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.label.LabelDetailMapper">
+  <resultMap id="BaseResultMap" type="com.zl.school.business.entity.label.LabelDetail">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="eid" jdbcType="VARCHAR" property="eid" />
+    <result column="lable_id" jdbcType="VARCHAR" property="lableId" />
+    <result column="relation_id" jdbcType="VARCHAR" property="relationId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, eid, lable_id, relation_id, type, create_user, created_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_zl_label_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByRelationId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_zl_label_detail
+    where relation_id = #{param1}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_zl_label_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByRelationId" parameterType="java.lang.String">
+    delete from t_zl_label_detail
+    where relation_id = #{param1}
+  </delete>
+  <insert id="insert" parameterType="com.zl.school.business.entity.label.LabelDetail">
+    insert into t_zl_label_detail (id, eid, lable_id, 
+      relation_id, type, create_user, 
+      created_time)
+    values (#{id,jdbcType=VARCHAR}, #{eid,jdbcType=VARCHAR}, #{lableId,jdbcType=VARCHAR}, 
+      #{relationId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zl.school.business.entity.label.LabelDetail">
+    insert into t_zl_label_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="eid != null">
+        eid,
+      </if>
+      <if test="lableId != null">
+        lable_id,
+      </if>
+      <if test="relationId != null">
+        relation_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="eid != null">
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="lableId != null">
+        #{lableId,jdbcType=VARCHAR},
+      </if>
+      <if test="relationId != null">
+        #{relationId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zl.school.business.entity.label.LabelDetail">
+    update t_zl_label_detail
+    <set>
+      <if test="eid != null">
+        eid = #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="lableId != null">
+        lable_id = #{lableId,jdbcType=VARCHAR},
+      </if>
+      <if test="relationId != null">
+        relation_id = #{relationId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zl.school.business.entity.label.LabelDetail">
+    update t_zl_label_detail
+    set eid = #{eid,jdbcType=VARCHAR},
+      lable_id = #{lableId,jdbcType=VARCHAR},
+      relation_id = #{relationId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

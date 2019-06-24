@@ -1,0 +1,47 @@
+server:
+  port: 9004
+  servlet:
+    context-path: /zlschool
+logging:
+  path: ./logs/zlschool-logs
+  file: ./logs/zlschool-logs/zlschool-logback.log
+  level:
+      root: info
+      com.zl.school.business.dao: debug
+
+spring:
+
+  application:
+    name: zl.school.business
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://47.103.34.200:3306/zlschool_test?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+      username: root
+      password: baoluan@2019
+
+      driver-class-name: com.mysql.jdbc.Driver
+      initialSize: 1
+      minIdle: 1
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 50
+      filters: stat
+      connectionProperties: druid.stat.mergeSql=false;druid.stat.slowSqlMillis=3000
+mybatis:
+  typeAliasesPackage: com.zl.school.business.entity
+  mapperLocations: classpath:com/zl/school/business/dao/**/*.xml
+
+

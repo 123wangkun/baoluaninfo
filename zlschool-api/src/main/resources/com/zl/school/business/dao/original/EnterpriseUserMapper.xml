@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.system.EnterpriseUserMapper">
+  <resultMap id="BaseResultMap" type="com.zl.school.business.entity.system.EnterpriseUser">
+    <id column="eid" jdbcType="VARCHAR" property="eid" />
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="depart_id" jdbcType="VARCHAR" property="departId" />
+    <result column="post" jdbcType="VARCHAR" property="post" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="allow_size" jdbcType="BIGINT" property="allowSize" />
+    <result column="make_size" jdbcType="BIGINT" property="makeSize" />
+    <result column="integral" jdbcType="INTEGER" property="integral" />
+    <result column="reg_status" jdbcType="INTEGER" property="regStatus" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="modifyd_time" jdbcType="TIMESTAMP" property="modifydTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    eid, user_id, depart_id, post, position, allow_size, make_size, integral, reg_status, 
+    type, status, created_time, modifyd_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.zl.school.business.entity.system.EnterpriseUser" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_enterprise_user
+    where eid = #{eid,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zl.school.business.entity.system.EnterpriseUser">
+    delete from t_sys_enterprise_user
+    where eid = #{eid,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zl.school.business.entity.system.EnterpriseUser">
+    insert into t_sys_enterprise_user (eid, user_id, depart_id, 
+      post, position, allow_size, 
+      make_size, integral, reg_status, 
+      type, status,
+      created_time, modifyd_time)
+    values (#{eid,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{departId,jdbcType=VARCHAR}, 
+      #{post,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{allowSize,jdbcType=BIGINT}, 
+      #{makeSize,jdbcType=BIGINT}, #{integral,jdbcType=INTEGER}, #{regStatus,jdbcType=INTEGER}, 
+       #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+      #{createdTime,jdbcType=TIMESTAMP}, #{modifydTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zl.school.business.entity.system.EnterpriseUser">
+    insert into t_sys_enterprise_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eid != null">
+        eid,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="departId != null">
+        depart_id,
+      </if>
+      <if test="post != null">
+        post,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="allowSize != null">
+        allow_size,
+      </if>
+      <if test="makeSize != null">
+        make_size,
+      </if>
+      <if test="integral != null">
+        integral,
+      </if>
+      <if test="regStatus != null">
+        reg_status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="modifydTime != null">
+        modifyd_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eid != null">
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null">
+        #{departId,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="allowSize != null">
+        #{allowSize,jdbcType=BIGINT},
+      </if>
+      <if test="makeSize != null">
+        #{makeSize,jdbcType=BIGINT},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="regStatus != null">
+        #{regStatus,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydTime != null">
+        #{modifydTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zl.school.business.entity.system.EnterpriseUser">
+    update t_sys_enterprise_user
+    <set>
+      <if test="departId != null">
+        depart_id = #{departId,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        post = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="allowSize != null">
+        allow_size = #{allowSize,jdbcType=BIGINT},
+      </if>
+      <if test="makeSize != null">
+        make_size = #{makeSize,jdbcType=BIGINT},
+      </if>
+      <if test="integral != null">
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="regStatus != null">
+        reg_status = #{regStatus,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydTime != null">
+        modifyd_time = #{modifydTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where eid = #{eid,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zl.school.business.entity.system.EnterpriseUser">
+    update t_sys_enterprise_user
+    set depart_id = #{departId,jdbcType=VARCHAR},
+      post = #{post,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      allow_size = #{allowSize,jdbcType=BIGINT},
+      make_size = #{makeSize,jdbcType=BIGINT},
+      integral = #{integral,jdbcType=INTEGER},
+      reg_status = #{regStatus,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      modifyd_time = #{modifydTime,jdbcType=TIMESTAMP}
+    where eid = #{eid,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectEntUser" parameterType="java.lang.String"  resultMap="BaseResultMap">
+    select * from t_sys_enterprise_user  where eid = #{param1} and user_id = #{param2}
+    </select>
+
+  <delete id="deleteEntUser" parameterType="com.zl.school.business.entity.system.EnterpriseUser">
+    delete from t_sys_enterprise_user
+    where eid = #{eId,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+</mapper>

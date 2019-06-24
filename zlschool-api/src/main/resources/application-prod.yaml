@@ -1,0 +1,37 @@
+server:
+  port: 9003
+  servlet:
+    context-path: /baoluan
+logging:
+  path: ./logs/baoluan-logs
+  file: ./logs/baoluan-logs/baoluan-logback.log
+  level:
+      root: info
+      com.zl.school.business.dao: debug
+
+spring:
+  application:
+    name: zlschool-api
+  datasource:
+      url: jdbc:mysql://47.103.34.200:3306/zlschool?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+      username: root
+      password: baoluan@2019
+
+      driver-class-name: com.mysql.jdbc.Driver
+      initialSize: 1
+      minIdle: 1
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 50
+      filters: stat
+      connectionProperties: druid.stat.mergeSql=false;druid.stat.slowSqlMillis=3000
+mybatis:
+  typeAliasesPackage: com.zl.school.business.entity
+  mapperLocations: classpath:com/zl/school/business/dao/**/*.xml

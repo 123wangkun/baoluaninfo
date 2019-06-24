@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.system.EnterpriseUserMapper">
+  <select id="selectCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from t_sys_enterprise_user  where eid = #{param1} and user_id = #{param2}
+    </select>
+
+  <select id="selectCountUser" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from t_sys_enterprise_user  where depart_id = #{param1}
+    </select>
+
+  <select id="selectCountUserByEid" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from t_sys_enterprise_user  where eid = #{param1}
+    </select>
+</mapper>

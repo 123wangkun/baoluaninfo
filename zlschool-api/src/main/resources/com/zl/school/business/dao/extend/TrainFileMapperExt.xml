@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zl.school.business.dao.train.TrainFileMapper">
+    <delete id="deleteFileByTrainId" parameterType="java.lang.String">
+        delete from t_train_file
+        where train_id = #{param1}
+    </delete>
+
+    <select id="selectAllFileByTrainId" parameterType="java.lang.String" resultType="com.zl.school.business.dto.train.GetTrainFileListRes">
+    select id, name, position,file_type, file_src, file_size
+    from t_train_file where train_id = #{param1}
+    </select>
+</mapper>
+

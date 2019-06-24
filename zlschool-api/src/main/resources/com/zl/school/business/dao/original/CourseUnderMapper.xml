@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.course.CourseUnderMapper">
+  <resultMap id="BaseResultMap" type="com.zl.school.business.entity.course.CourseUnder">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="eid" jdbcType="VARCHAR" property="eid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type_id" jdbcType="VARCHAR" property="typeId" />
+    <result column="descript" jdbcType="VARCHAR" property="descript" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="qrcode_src" jdbcType="VARCHAR" property="qrcodeSrc" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="study_time" jdbcType="TIMESTAMP" property="studyTime" />
+    <result column="total_time" jdbcType="INTEGER" property="totalTime" />
+    <result column="position" jdbcType="INTEGER" property="position" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="pro_content" jdbcType="VARCHAR" property="proContent" />
+    <result column="prod_time" jdbcType="TIMESTAMP" property="prodTime" />
+    <result column="pro_user" jdbcType="VARCHAR" property="proUser" />
+    <result column="pro_memo" jdbcType="VARCHAR" property="proMemo" />
+    <result column="pro_status" jdbcType="INTEGER" property="proStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, eid, name, type_id, descript, state, qrcode_src, address, study_time, total_time, 
+    position, memo, created_time, create_user, updated_time, update_user, pro_content, 
+    prod_time, pro_user, pro_memo, pro_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_course_under
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_course_under
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zl.school.business.entity.course.CourseUnder">
+    insert into t_course_under (id, eid, name, 
+      type_id, descript, state, 
+      qrcode_src, address, study_time, 
+      total_time, position, memo, 
+      created_time, create_user, updated_time, 
+      update_user, pro_content, prod_time, 
+      pro_user, pro_memo, pro_status
+      )
+    values (#{id,jdbcType=VARCHAR}, #{eid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{typeId,jdbcType=VARCHAR}, #{descript,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{qrcodeSrc,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{studyTime,jdbcType=TIMESTAMP}, 
+      #{totalTime,jdbcType=INTEGER}, #{position,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{proContent,jdbcType=VARCHAR}, #{prodTime,jdbcType=TIMESTAMP}, 
+      #{proUser,jdbcType=VARCHAR}, #{proMemo,jdbcType=VARCHAR}, #{proStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zl.school.business.entity.course.CourseUnder">
+    insert into t_course_under
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="eid != null">
+        eid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="descript != null">
+        descript,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="qrcodeSrc != null">
+        qrcode_src,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="studyTime != null">
+        study_time,
+      </if>
+      <if test="totalTime != null">
+        total_time,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="proContent != null">
+        pro_content,
+      </if>
+      <if test="prodTime != null">
+        prod_time,
+      </if>
+      <if test="proUser != null">
+        pro_user,
+      </if>
+      <if test="proMemo != null">
+        pro_memo,
+      </if>
+      <if test="proStatus != null">
+        pro_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="eid != null">
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="descript != null">
+        #{descript,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="qrcodeSrc != null">
+        #{qrcodeSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="studyTime != null">
+        #{studyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalTime != null">
+        #{totalTime,jdbcType=INTEGER},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="proContent != null">
+        #{proContent,jdbcType=VARCHAR},
+      </if>
+      <if test="prodTime != null">
+        #{prodTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proUser != null">
+        #{proUser,jdbcType=VARCHAR},
+      </if>
+      <if test="proMemo != null">
+        #{proMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="proStatus != null">
+        #{proStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zl.school.business.entity.course.CourseUnder">
+    update t_course_under
+    <set>
+      <if test="eid != null">
+        eid = #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="descript != null">
+        descript = #{descript,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="qrcodeSrc != null">
+        qrcode_src = #{qrcodeSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="studyTime != null">
+        study_time = #{studyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalTime != null">
+        total_time = #{totalTime,jdbcType=INTEGER},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="proContent != null">
+        pro_content = #{proContent,jdbcType=VARCHAR},
+      </if>
+      <if test="prodTime != null">
+        prod_time = #{prodTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proUser != null">
+        pro_user = #{proUser,jdbcType=VARCHAR},
+      </if>
+      <if test="proMemo != null">
+        pro_memo = #{proMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="proStatus != null">
+        pro_status = #{proStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zl.school.business.entity.course.CourseUnder">
+    update t_course_under
+    set eid = #{eid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      descript = #{descript,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      qrcode_src = #{qrcodeSrc,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      study_time = #{studyTime,jdbcType=TIMESTAMP},
+      total_time = #{totalTime,jdbcType=INTEGER},
+      position = #{position,jdbcType=INTEGER},
+      memo = #{memo,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      pro_content = #{proContent,jdbcType=VARCHAR},
+      prod_time = #{prodTime,jdbcType=TIMESTAMP},
+      pro_user = #{proUser,jdbcType=VARCHAR},
+      pro_memo = #{proMemo,jdbcType=VARCHAR},
+      pro_status = #{proStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

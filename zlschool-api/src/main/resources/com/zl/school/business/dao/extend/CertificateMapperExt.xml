@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.certificate.CertificateMapper">
+
+  <select id="selectAllCerByEid" parameterType="com.zl.school.business.dto.certificate.GetCertificateListReq" resultType="com.zl.school.business.dto.certificate.GetCertificateListRes">
+    select
+    a.id, a.name, a.state,a.created_time as createdTime, b.integral,a.memo,a.file_src as fileSrc,b.name as typeName,c.real_name as realName,
+    a.pro_status as proStatus,
+    case
+      when a.pro_status=1 then '待审核'
+      when a.pro_status=2 then '审核未通过'
+      when a.pro_status=3 then
+        (case
+        when a.state=1 then '启用'
+        when a.state=2 then '禁用'
+        end)
+    end  as statusName
+    from t_certificate_type b,t_certificate a,t_sys_user c
+    where a.eid = #{eId} and b.id = a.type_id and a.user_id = c.id
+    <if test="typeId != '' and typeId != null">
+      AND b.id LIKE '%${typeId}%'
+    </if>
+    <if test="realName != '' and realName != null">
+      AND c.real_name LIKE '%${realName}%'
+    </if>
+    <if test="state != -1 and state != 0">
+      AND a.state = #{state}
+    </if>
+    <if test="proStatus != -1 and proStatus != 0">
+      AND  a.pro_status = #{proStatus}
+    </if>
+    GROUP BY a.id
+  </select>
+
+  <select id="selectUserCertificateById" parameterType="java.lang.String" resultType="com.zl.school.business.dto.certificate.GetUserCertificateListRes">
+    select
+    a.id, a.name, a.state,a.created_time as createdTime, b.integral,a.memo,a.file_src as fileSrc,b.name as typeName,c.real_name as realName,
+    case
+      when a.state=1 then '启用'
+      when a.state=2 then '禁用'
+    end  as stateName
+    from t_certificate_type b,t_certificate a,t_sys_user c
+    where a.eid = #{param1} and b.id = a.type_id and a.user_id = c.id and c.id=#{param2} and a.pro_status = 3
+    GROUP BY a.id
+  </select>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.system.EnterpriseMapper">
+
+    <select id="selectAllEnterprise" parameterType="com.zl.school.business.dto.system.GetEnterpriseListReq" resultType="com.zl.school.business.dto.system.GetEnterpriseListRes">
+        select
+        a.id, a.name, a.code, a.allow_size as allowSize, a.make_size as makeSize, a.allow_user as allowUser, a.make_user as makeUser, a.validate,
+        a.status, a.license, a.license_term as licenseTerm,a.created_time as createdTime,a.pro_status as proStatus,
+        case
+        when a.pro_status=1 then '待审核'
+        when a.pro_status=2 then '审核未通过'
+        when a.pro_status=3 then
+          (case
+            when a.status=1 then '启用'
+            when a.status=2 then '禁用'
+          end)
+        end  as statusName
+        from t_sys_enterprise a
+        <if test="((name != '' and name != null ) or (proStatus != -1 and proStatus != 0) or (status != -1 and status != 0))">
+            where
+        </if>
+        <if test="name != '' and name != null">
+            name LIKE '%${name}%'
+        </if>
+        <if test="((proStatus != -1 and proStatus != 0) and (name != '' and name != null ))">
+            AND  a.pro_status = #{proStatus}
+        </if>
+        <if test="((proStatus != -1 and proStatus != 0) and (name == '' or name == null ))">
+            a.pro_status = #{proStatus}
+        </if>
+        <if test="((status != -1 and status != 0)  and (name != '' and name != null )) or ((status != -1 and status != 0)  and (proStatus != -1 and proStatus != 0))">
+            AND  a.status = #{status} AND a.pro_status = 3
+        </if>
+        <if test="((status != -1 and status != 0)  and (name == '' or name == null ) and (proStatus == -1 or proStatus == 0 ))">
+           a.status = #{status}  AND a.pro_status = 3
+        </if>
+        order by a.pro_status asc
+    </select>
+
+    <select id="selectMyEnterprise" parameterType="java.lang.String" resultType="com.zl.school.business.dto.system.GetEnterpriseListRes">
+        select
+        a.id, a.name, a.code, a.allow_size as allowSize, a.make_size as makeSize, a.allow_user as allowUser, a.make_user as makeUser, a.validate,
+        a.status, a.license, a.license_term as licenseTerm,a.created_time as createdTime,a.pro_status as proStatus,
+        case
+        when a.pro_status=1 then '审核中'
+        when a.pro_status=2 then '审核未通过'
+        when a.pro_status=3 then
+          (case
+            when a.status=1 then '启用'
+            when a.status=2 then '禁用'
+          end)
+        end  as statusName
+        from t_sys_enterprise a,t_sys_enterprise_user b
+        where b.user_id =#{param1} and a.id = b.eid
+        order by a.created_time ,a.id
+    </select>
+
+</mapper>

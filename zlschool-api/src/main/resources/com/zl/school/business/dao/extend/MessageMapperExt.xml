@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.message.MessageMapper">
+
+  <select id="selectAllMessageByEid" parameterType="com.zl.school.business.dto.message.GetMessageListReq" resultType="com.zl.school.business.dto.message.GetMessageListRes">
+    select
+    id, title, classname,state, created_time as createdTime
+    from t_zl_message
+    where eid = #{eId} and type = #{type}
+    <if test="className != '' and className != null">
+      AND classname LIKE '%${className}%'
+    </if>
+    <if test="state != '' and state != null">
+      AND state LIKE '%${state}%'
+    </if>
+    <if test="title != '' and title != null">
+      AND title LIKE '%${title}%'
+    </if>
+  </select>
+</mapper>

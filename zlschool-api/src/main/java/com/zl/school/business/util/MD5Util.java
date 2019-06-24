@@ -1,0 +1,24 @@
+package com.zl.school.business.util;
+
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
+
+public class MD5Util {
+
+	protected MD5Util(){
+
+	}
+
+	private static final String ALGORITH_NAME = "md5";
+
+	private static final int HASH_ITERATIONS = 2;
+    //解密
+	public static String encrypt(String password) {
+		return new SimpleHash(ALGORITH_NAME, password, ByteSource.Util.bytes(password), HASH_ITERATIONS).toHex();
+	}
+
+	public static void main(String[] args) {
+		System.out.println(encrypt("1234qwer"));
+	}
+
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zl.school.business.dao.system.UserPowerMapper" >
+  <resultMap id="BaseResultMap" type="com.zl.school.business.entity.system.UserPower" >
+      <result  column="eid" jdbcType="VARCHAR" javaType="java.lang.String"  property="eid"/>
+      <result  column="user_id" jdbcType="VARCHAR" javaType="java.lang.String"  property="userId"/>
+      <result  column="role_id" jdbcType="VARCHAR" javaType="java.lang.String" property="roleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+      eid, user_id, role_id
+    </sql>
+  <select id="selectByKey" parameterType="com.zl.school.business.entity.system.UserPower" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from t_sys_user_power
+  where eid = #{eid,jdbcType=VARCHAR}
+  and user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zl.school.business.entity.system.UserPower" >
+    delete from t_sys_user_power
+    where eid = #{eid,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+      and role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zl.school.business.entity.system.UserPower" >
+    insert into t_sys_user_power (eid, user_id, role_id)
+    values (#{eid,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zl.school.business.entity.system.UserPower" >
+    insert into t_sys_user_power
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

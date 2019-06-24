@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.system.RoleMapper">
+
+  <select id="getRoleList" parameterType="java.lang.String" resultType="com.zl.school.business.dto.system.GetRoleListRes">
+    select 
+    id, name, memo
+    from t_sys_role
+    where eid = #{param1}
+  </select>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zl.school.business.dao.exam.ExamUnderMapper">
+    <select id="selectAllCourseUnderByEid" parameterType="com.zl.school.business.dto.exam.GetExamUnderListReq" resultType="com.zl.school.business.dto.exam.GetExamUnderListRes">
+        select
+        id, name, address, study_time as studyTime, total_time as totalTime, state, qrcode_src as qrcodeSrc,
+        createdt_time as createdtTime
+        case
+        when a.state=1 then '发布中'
+        when a.state=2 then '已结束'
+        when a.state=3 then '未启用'
+        end  as stateName
+        from t_exam_under
+        where eid = #{eId}
+        <if test="name != '' and name != null">
+            AND a.name LIKE '%${name}%'
+        </if>
+        <if test="state != '' and state != null">
+            AND a.state LIKE '%${state}%'
+        </if>
+        group by id
+    </select>
+
+    <select id="selectExamUnderUserList" parameterType="com.zl.school.business.dto.exam.GetExamUnderUserReq" resultType="com.zl.school.business.dto.exam.GetExamUnderUserRes">
+        select
+        a.id, a.name as examUnderName, e.name as userName, c.name as depName, b.spend_time as spendTime, b.state, b.total_score as totalScore,
+        b.createdt_time as createdtTime
+        case
+        when a.state=1 then '未进行'
+        when a.state=2 then '已完成'
+        when a.state=3 then '未考试'
+        end  as stateName
+        from t_exam_under a,t_exam_under_detail b,t_sys_department c,t_sys_enterprise_user d,t_sys_user e
+        where a.id = #{id} and a.id = b.under_id and c.id = d.depart_id and b.user_id = d.user_id and b.user_id = e.id
+        <if test="name != '' and name != null">
+            AND e.name LIKE '%${name}%'
+        </if>
+        group by b.user_id
+    </select>
+</mapper>
+

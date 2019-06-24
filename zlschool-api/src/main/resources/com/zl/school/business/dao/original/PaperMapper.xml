@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.exam.PaperMapper">
+  <resultMap id="BaseResultMap" type="com.zl.school.business.entity.exam.Paper">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="eid" jdbcType="VARCHAR" property="eid" />
+    <result column="type_id" jdbcType="VARCHAR" property="typeId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="total_score" jdbcType="INTEGER" property="totalScore" />
+    <result column="pass_line" jdbcType="INTEGER" property="passLine" />
+    <result column="spend_time" jdbcType="INTEGER" property="spendTime" />
+    <result column="start_status" jdbcType="INTEGER" property="startStatus" />
+    <result column="release_status" jdbcType="INTEGER" property="releaseStatus" />
+    <result column="integral" jdbcType="INTEGER" property="integral" />
+    <result column="single" jdbcType="INTEGER" property="single" />
+    <result column="multiple" jdbcType="INTEGER" property="multiple" />
+    <result column="judge" jdbcType="INTEGER" property="judge" />
+    <result column="position" jdbcType="INTEGER" property="position" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, eid, type_id, name, total_score, pass_line, spend_time, start_status, release_status, 
+    integral, single, multiple, judge, position, created_time, create_user, updated_time, 
+    update_user, memo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_paper
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_paper
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zl.school.business.entity.exam.Paper">
+    insert into t_paper (id, eid, type_id, 
+      name, total_score, pass_line, 
+      spend_time, start_status, release_status, 
+      integral, single, multiple, 
+      judge, position, created_time, 
+      create_user, updated_time, update_user, 
+      memo)
+    values (#{id,jdbcType=VARCHAR}, #{eid,jdbcType=VARCHAR}, #{typeId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{totalScore,jdbcType=INTEGER}, #{passLine,jdbcType=INTEGER}, 
+      #{spendTime,jdbcType=INTEGER}, #{startStatus,jdbcType=INTEGER}, #{releaseStatus,jdbcType=INTEGER}, 
+      #{integral,jdbcType=INTEGER}, #{single,jdbcType=INTEGER}, #{multiple,jdbcType=INTEGER}, 
+      #{judge,jdbcType=INTEGER}, #{position,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zl.school.business.entity.exam.Paper">
+    insert into t_paper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="eid != null">
+        eid,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="totalScore != null">
+        total_score,
+      </if>
+      <if test="passLine != null">
+        pass_line,
+      </if>
+      <if test="spendTime != null">
+        spend_time,
+      </if>
+      <if test="startStatus != null">
+        start_status,
+      </if>
+      <if test="releaseStatus != null">
+        release_status,
+      </if>
+      <if test="integral != null">
+        integral,
+      </if>
+      <if test="single != null">
+        single,
+      </if>
+      <if test="multiple != null">
+        multiple,
+      </if>
+      <if test="judge != null">
+        judge,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="eid != null">
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="totalScore != null">
+        #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="passLine != null">
+        #{passLine,jdbcType=INTEGER},
+      </if>
+      <if test="spendTime != null">
+        #{spendTime,jdbcType=INTEGER},
+      </if>
+      <if test="startStatus != null">
+        #{startStatus,jdbcType=INTEGER},
+      </if>
+      <if test="releaseStatus != null">
+        #{releaseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="single != null">
+        #{single,jdbcType=INTEGER},
+      </if>
+      <if test="multiple != null">
+        #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="judge != null">
+        #{judge,jdbcType=INTEGER},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zl.school.business.entity.exam.Paper">
+    update t_paper
+    <set>
+      <if test="eid != null">
+        eid = #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="totalScore != null">
+        total_score = #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="passLine != null">
+        pass_line = #{passLine,jdbcType=INTEGER},
+      </if>
+      <if test="spendTime != null">
+        spend_time = #{spendTime,jdbcType=INTEGER},
+      </if>
+      <if test="startStatus != null">
+        start_status = #{startStatus,jdbcType=INTEGER},
+      </if>
+      <if test="releaseStatus != null">
+        release_status = #{releaseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="integral != null">
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="single != null">
+        single = #{single,jdbcType=INTEGER},
+      </if>
+      <if test="multiple != null">
+        multiple = #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="judge != null">
+        judge = #{judge,jdbcType=INTEGER},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zl.school.business.entity.exam.Paper">
+    update t_paper
+    set eid = #{eid,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      total_score = #{totalScore,jdbcType=INTEGER},
+      pass_line = #{passLine,jdbcType=INTEGER},
+      spend_time = #{spendTime,jdbcType=INTEGER},
+      start_status = #{startStatus,jdbcType=INTEGER},
+      release_status = #{releaseStatus,jdbcType=INTEGER},
+      integral = #{integral,jdbcType=INTEGER},
+      single = #{single,jdbcType=INTEGER},
+      multiple = #{multiple,jdbcType=INTEGER},
+      judge = #{judge,jdbcType=INTEGER},
+      position = #{position,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.system.LoginMapper">
+  <resultMap id="BaseResultMap" type="com.zl.school.business.entity.system.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="tele_phone" jdbcType="VARCHAR" property="telePhone" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="age" jdbcType="TIMESTAMP" property="age" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="modifyd_time" jdbcType="TIMESTAMP" property="modifydTime" />
+    <result column="last_login" jdbcType="TIMESTAMP" property="lastLogin" />
+    <result column="last_eid" jdbcType="VARCHAR" property="lastEid" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="wx_open_id" jdbcType="VARCHAR" property="wxOpenId" />
+    <result column="ali_user_id" jdbcType="VARCHAR" property="aliUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tele_phone, real_name, password, email, age, sex, education, degree, created_time,
+    modifyd_time, last_login, last_eid, memo, wx_open_id, ali_user_id
+  </sql>
+  <select id="getUserByPhone" parameterType="com.zl.school.business.dto.system.LoginReq" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_user
+    where tele_phone = #{telePhone}
+  </select>
+  <select id="isExistPhone" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_sys_user where tele_phone=#{phone}
+  </select>
+</mapper>

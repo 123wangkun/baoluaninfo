@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.school.business.dao.system.UserMapper">
+
+    <select id="getUserList" parameterType="com.zl.school.business.dto.system.GetUserListReq" resultType="com.zl.school.business.dto.system.GetUserListRes">
+        select
+        a.id, a.real_name as name, a.tele_phone as telePhone,b.reg_status as regStatus, b.created_time as createdTime,
+        b.status as status
+        from t_sys_user a,t_sys_enterprise_user b
+        where a.id = b.user_id
+        <if test="eid != '' and eid != null">
+            and b.eid = #{eid}
+        </if>
+        <if test="departId != '' and departId != null">
+            and b.depart_id = #{departId}
+        </if>
+        <if test="realName != '' and realName != null">
+            AND a.real_name LIKE '%${realName}%'
+        </if>
+        group by a.id
+    </select>
+
+    <select id="getPersonalUserList" parameterType="com.zl.school.business.dto.system.GetPersonalUserListReq" resultType="com.zl.school.business.dto.system.GetPersonalUserListRes">
+        select
+        a.id, a.real_name as realName, a.tele_phone as telePhone,b.integral, b.created_time as createdTime,
+        b.status, b.integral,b.make_size as makeSize,
+        case
+            when b.status=1 then '启用'
+            when b.status=2 then '禁用'
+        end as statusName
+        from t_sys_user a,t_sys_enterprise_user b
+        where a.id = b.user_id and b.eid = #{eId}
+        <if test="realName != '' and realName != null">
+            AND a.real_name LIKE '%${realName}%'
+        </if>
+        group by a.id
+    </select>
+
+    <select id="getUser" parameterType="java.lang.String" resultType="com.zl.school.business.dto.system.GetUserRes">
+        select
+        a.id, a.real_name as realName,a.tele_phone as telePhone,a.email, a.age, b.post, b.position,
+        a.education, a.degree,b.status, a.memo
+        from t_sys_user a,t_sys_enterprise_user b
+        where a.id = #{param1} and b.eid = #{param2}  and a.id=b.user_id
+    </select>
+
+    <select id="isExistLoginName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from t_sys_user where login_name=#{param1}
+    </select>
+
+    <select id="getPersonal" parameterType="java.lang.String" resultType="com.zl.school.business.dto.system.GetPersonalRes">
+        select
+        a.id, a.real_name as realName,a.tele_phone as telePhone,b.status, b.allow_size as allowSize
+        from t_sys_user a,t_sys_enterprise_user b
+        where a.id = #{param1} and b.eid = #{param2}  and a.id=b.user_id
+    </select>
+</mapper>
